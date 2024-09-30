@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta Desplegable Responsive</title>
+  <style>
+    body {
+      font-family: 'Brush Script MT', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    .envelope {
+      width: 90%;
+      max-width: 400px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #ffcc00;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      z-index: 1;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #ffcc00;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      transform-origin: top;
+      transform: rotateX(0deg);
+      transition: transform 0.4s ease;
+      z-index: 2; /* Coloca la solapa por encima */
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      line-height: 1.6;
+      margin-top: 60px; /* Ajuste para que no esté cubierto */
+      max-height: 0; /* Inicialmente colapsado */
+      overflow: hidden; /* Ocultar contenido al colapsar */
+      transition: max-height 0.4s ease; /* Transición de max-height */
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope.open .card {
+      max-height: 800px; /* Un valor alto para permitir la expansión */
+      padding: 20px; /* Espacio interno */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .envelope {
+        max-width: 100%;
+        margin: 0 10px;
+      }
+
+      .card {
+        padding: 15px;
+        font-size: 14px;
+      }
+    }
+
+    #img1 {
+      width: 50px;
+      height: 50px;
+      margin-right: 50px;
+    }
+
+    #img2 {
+      width: 50px;
+      height: 50px;
+      margin-left: 50px;
+    }
+
+    p {
+      font-size: 1.3em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="envelope" onclick="toggleEnvelope()">
+    <div class="flap"></div>
+    <div class="card">
+      <p>Amor...</p>
+      <p>Sí, como intuirás, me desvelé haciendo esto.</p>
+      <p>No sé por dónde empezar... Esta carta es, sobre todo, una disculpa. Sí, sé que ya me dijiste que me perdonabas
+        y que no querías que esto pasara a mayores o siguiera, pero la verdad es que no puedo dormir sin antes
+        escribirte. Las lágrimas caen sobre mi teclado sin cesar.</p>
+      <p>La verdad es que me sentí muy mal cuando me dijiste que ya estabas acostumbrada a que olviden fechas
+        importantes como cumplir meses contigo. Yo soy una persona muy atenta a los detalles, y el hecho de que se me
+        haya pasado eso me está torturando de una manera que ni te imaginas. Nunca he olvidado una fecha importante. No
+        me justifico, luego actué mal, de forma impulsiva como siempre, y además muy egoísta. No quiero que pienses que
+        no me importa nuestra relación, porque la verdad es que me importa mucho, y me duele que las cosas se arruinen
+        por mis errores.</p>
+      <p>Hablando de ti, obviamente esto te cayó como un balde de agua fría: "¿Cómo pudo mi novio haber dejado pasar
+        algo tan importante?", dirás. Y tienes toda la razón. La verdad es que no tengo ni la más mínima idea de cómo se
+        me pasó, considerando que soy una persona muy atenta a todo. Pero bueno, no hay excusas para lo que hice, y no
+        quiero que pienses que no me importa, sino todo lo contrario. Me importa tanto que estoy llorando como un
+        estúpido. Si no fuera así, no estaría escribiendo esto ni contándote todo lo que pienso al respecto.</p>
+      <p>Con cariño y mucha pena,<br> 
+      <img id="img1" src="./4ed39fd7-2c3a-4c74-9631-875536649036.gif">Tu amor, Víctor
+      <img id="img2" src="./5f563b57-d3f6-42a0-ae01-3695ecdc88c2.gif"></p>
+    </div>
+  </div>
+
+  <script>
+    function toggleEnvelope() {
+      var envelope = document.querySelector('.envelope');
+      var card = document.querySelector('.card');
+      
+      // Cambiar la clase para abrir o cerrar
+      envelope.classList.toggle('open');
+      
+      // Ajustar la altura de la carta al abrirla
+      if (envelope.classList.contains('open')) {
+        card.style.maxHeight = card.scrollHeight + "px"; // Establecer altura máxima al contenido
+      } else {
+        card.style.maxHeight = "0"; // Colapsar
+      }
+    }
+  </script>
+
+</body>
+
+</html>
